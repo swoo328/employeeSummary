@@ -104,3 +104,46 @@ const managerQuestion = [
         name: "managerNumber",
     },
 ];
+// adding team members
+const addMember = [
+    {
+        type: "list",
+        name: "teamMember",
+        message: "What do you want in your team?",
+        choices: ["Engineer", "Intern", "Manageer", "None"]
+    }
+];
+//confirming to make a team
+const confirmTeam = [
+    {
+        type: "confirm",
+        message: "Are you building a team?",
+        name: "confirmTeam"
+    }
+]
+inquirer.prompt(confirmTeam).then(answer => {
+    answer.confirmTeam
+        ? addManager() : console.log("error");
+})
+// prompt the manager question 
+const addManager = () => {
+    inquirer.prompt(managerQuestion).then(answer => {
+        console.log(answer);
+        team.push(new Manager(answer.managerName, answer.manageId, answer.managerEmail, answer.managerOfficeNum));
+    });
+}
+
+const addEngineer = () => {
+    inquirer.prompt(engineerQuestion).then(answer => {
+        console.log(answer);
+        team.push(new Manager(answer.engineerName, answer.engineerId, answer.engineerEmail, answer.engineerGithub));
+    });
+}
+
+//prompt the intern question
+const addIntern = () => {
+    inquirer.prompt(internQuestion).then(answer => {
+        console.log(answer);
+        team.push(new Manager(answer.internName, answer.internId, answer.internEmail, answer.internSchool));
+    });
+}

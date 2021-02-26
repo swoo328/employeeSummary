@@ -6,9 +6,9 @@ class Manager extends Employee{
         //super calls the employee object for the name, id and email 
         //to be used in the constructor
         super(name, id, email);
-        this.officeNumber = this.officeNumber;
+        this.officeNumber = officeNumber;
     }
-    getofficeNumber(){
+    getOfficeNumber(){
         return this.officeNumber;
     }
     getRole(){
