@@ -121,6 +121,7 @@ const confirmTeam = [
         name: "confirmTeam"
     }
 ]
+//ask the user to confirm 
 inquirer.prompt(confirmTeam).then(answer => {
     // answer.confirmTeam
     //     ? addManager()  : console.log("error");
@@ -140,7 +141,7 @@ const addManager = () => {
         newMembers();
     });
 }
-
+//prompt the engineer question
 const addEngineer = () => {
     inquirer.prompt(engineerQuestion).then(answer => {
         console.log(answer);
@@ -180,6 +181,7 @@ const newMembers = () => {
     })
 
 }
+//creating HTML file
 const createHTML = () => {
     console.log("This is a new html file");
     render(team);
