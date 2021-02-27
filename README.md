@@ -4,7 +4,7 @@
 https://github.com/swoo328/employeeSummary
 
 # Screenshot
-![](images/screenshot.png)
+![](images/screenshot.PNG)
 
 # Summary 
 The employeeSummary application will confirm the user if they want to make a team. Once confirm, the application is gonna the 
