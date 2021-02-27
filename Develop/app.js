@@ -110,7 +110,7 @@ const addMember = [
         type: "list",
         name: "teamMember",
         message: "What do you want in your team?",
-        choices: ["Engineer", "Intern", "Manageer", "None"]
+        choices: ["Engineer", "Intern", "Manager", "None"]
     }
 ];
 //confirming to make a team
@@ -122,21 +122,30 @@ const confirmTeam = [
     }
 ]
 inquirer.prompt(confirmTeam).then(answer => {
-    answer.confirmTeam
-        ? addManager() : console.log("error");
+    // answer.confirmTeam
+    //     ? addManager()  : console.log("error");
+    if(answer.confirmTeam){
+        console.log("Add your manager");
+        addManager();
+    }
+    else{
+        console.log("error");
+    }
 })
 // prompt the manager question 
 const addManager = () => {
     inquirer.prompt(managerQuestion).then(answer => {
         console.log(answer);
-        team.push(new Manager(answer.managerName, answer.manageId, answer.managerEmail, answer.managerOfficeNum));
+        team.push(new Manager(answer.managerName, answer.managerId, answer.managerEmail, answer.managerNumber));
+        newMembers();
     });
 }
 
 const addEngineer = () => {
     inquirer.prompt(engineerQuestion).then(answer => {
         console.log(answer);
-        team.push(new Manager(answer.engineerName, answer.engineerId, answer.engineerEmail, answer.engineerGithub));
+        team.push(new Engineer(answer.engineerName, answer.engineerId, answer.engineerEmail, answer.engineerGithub));
+        newMembers();
     });
 }
 
@@ -144,6 +153,37 @@ const addEngineer = () => {
 const addIntern = () => {
     inquirer.prompt(internQuestion).then(answer => {
         console.log(answer);
-        team.push(new Manager(answer.internName, answer.internId, answer.internEmail, answer.internSchool));
+        team.push(new Intern(answer.internName, answer.internId, answer.internEmail, answer.internSchool));
+        newMembers();
     });
 }
+
+// addomg new members
+const newMembers = () => {
+    inquirer.prompt(addMember).then(data =>{
+        switch(data.teamMember){
+            case "Engineer":
+                addEngineer();
+                break;
+       
+            case "Intern":
+                addIntern();
+                break;
+        
+            case "Manager":
+                addManager();
+                break;
+    
+            default:
+                createHTML();
+        }
+    })
+
+}
+const createHTML = () => {
+    console.log("This is a new html file");
+    render(team);
+    fs.writeFile("index.html", render(team), function(err){
+        if(err) throw err;
+    })
+};
